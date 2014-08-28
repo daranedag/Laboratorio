@@ -1,0 +1,88 @@
+IDENTIFICACION DEL LABORATORIO						
+						
+Razón Social		Universidad Austral de Chile			RUT	81.380.500-6
+						
+Dirección		Independencia 641			Comuna	Valdivia
+						
+Fono/Fax		63-221431,  63-221234			Correo electrónico	labnsf@uach.cl
+					http://www.uach.cl/labsuelosforestales	
+
+
+
+IDENTIFICACION DEL OPERADOR						
+						
+Razón Social		Angélica Saigg Oyarzún			RUT	15,304,305-1
+						
+Dirección		Pje.Loncomilla 2220			Comuna	Valdivia
+						
+Fono/Fax		92907580			Correo electrónico	angelica.saigg.09@gmail.com
+
+
+
+IDENTIFICACION DE LA PERSONA QUE TOMÓ LA MUESTRA						
+						
+Nombre		Angélica Saigg Oyarzún			RUT	15,304,305-1
+						
+Teléfono			92907580			
+
+
+
+IDENTIFICACION DEL AGRICULTOR						
+						
+Nombre		JOSÉ SANCHEZ VÁSQUEZ			RUT	14.379.341-9
+						
+Dirección		HUICHACO S/N			Comuna	MAFIL
+						
+Organización			PRODESAL MAFIL		Area INDAP	VALDIVIA
+
+
+
+IDENTIFICACION DE LA MUESTRA						
+						
+Nº Laboratorio			615		Potrero	N°2
+						
+Predio			HUICHACO		Prof. Muestreo (cm)	20
+						
+						
+Comuna			MAFIL		Tipo de Suelo	Trumao
+
+
+
+RESULTADOS ANÁLISIS DE SUELO						
+Fósforo  mg/Kg			5,6	Saturación de Al %		2,7
+						
+Materia Orgánica %				CICE cmol+/Kg		5,25
+						
+pH en agua			5,74	S mg/Kg		
+						
+Ca intercambiable cmol+/Kg			3,75	* N mg/Kg		
+						
+Mg intercambiable cmol+/Kg			1,14	Boro mg/Kg		
+						
+Na intercambiable cmol+/Kg			0,14	Hierro mg/Kg		
+						
+K intercambiable cmol+/Kg			0,09	Manganeso mg/Kg		
+						
+Suma Bases cmol+/Kg			5,11	Cobre mg/Kg		
+						
+Al intercambiable cmol+/kg			0,14	Zinc mg/Kg		
+
+
+
+FECHA RECEPCION DE MUESTRA			28 de mayo de 2014	FECHA ENTREGA DE RESULTADOS		4 de junio de 2014
+						
+
+
+METODOLOGÍA						
+						
+pH en agua: relación 1:2,5; materia orgánica: combustión humeda y colorimetría; P disponible: extracción con NaHCO3 0,5 mol/L a pH 8,5 (Olsen); S disponible: 						
+extracciòn conCa(H2PO4)2 0,01 mol/L; Ca, Mg, K y Na intercambiables: extracción con CH3COONH4 1 mol/L a pH 7,0; Al intercambiable: extracción con KCl 1 mol/L; 						
+CICE: Ca+Mg+K+Na+Al intercambiables; saturación de Al:(Al intercambiable x 100)/CICE; 						
+Técnicas analíticas según normas de la CNA de la Sociedad Chilena de la Ciencia del Suelo. 						
+* N corresponde a una metodología aún no normalizada por la CNA.						
+
+
+
+OBSERVACIONES
+
+						
