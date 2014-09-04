@@ -17,6 +17,7 @@ public class Inicio extends javax.swing.JPanel {
      */
     public Inicio() {
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -53,7 +54,7 @@ public class Inicio extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Laboratorio de Nutrición y suelos forestales");
+        jLabel3.setText("Laboratorio de Nutrición y Suelos Forestales");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,7 +75,7 @@ public class Inicio extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addComponent(jButton1)))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,6 +103,7 @@ public class Inicio extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Boton para validar datos ingresados con consulta  la BD
+        Tareas v1 = new Tareas();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

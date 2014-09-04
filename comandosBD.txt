@@ -1,0 +1,133 @@
+CREATE TABLE usuario(
+	rut VARCHAR(10) PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	apellido VARCHAR(50) NOT NULL,
+	pass VARCHAR(25) NOT NULL
+);
+
+CREATE TABLE operador(
+	rut VARCHAR(10) PRIMARY KEY,
+	nombre VARCHAR(90) NOT NULL,
+	apellido VARCHAR(50) NOT NULL,
+	direccion varchar(90) NOT NULL,
+	fono VARCHAR(20),
+	fax VARCHAR(20),
+	comuna VARCHAR(30),
+	region VARCHAR(5),
+	mail VARCHAR(70)
+);
+
+Create table predio(
+	rol varchar(10) PRIMARY KEY,
+	nombre varchar(45),
+	provincia varchar(45),
+	comuna varchar(45),
+	region varchar(5)
+);
+
+Create table agricultor(
+	rut VARCHAR(10) PRIMARY KEY,
+	nombre VARCHAR(90) NOT NULL,
+	direccion varchar(90) NOT NULL,
+	comuna VARCHAR(30),
+	provincia varchar(45),
+	region VARCHAR(5),
+	organizacion varchar(45),
+	areaINDAP VARCHAR(45)
+);
+
+Create table muestreador(
+	rut varchar(10) primary key,
+	nombre varchar(90) not null
+);
+
+create table muestra(
+	tipoMuestra varchar(1) UNIQUE,
+	numLaboratorio varchar(7) UNIQUE,
+	predio_Rol varchar(10) UNIQUE,
+	comuna varchar(45),
+	potrero varchar(45),
+	profMuestreo float,
+	tipoSuelo varchar(45),
+	primary key(tipoMuestra, numLaboratorio, predio_Rol),
+	constraint muestra_predio_predioRol_fkey FOREIGN KEY(predio_Rol)
+		references predio(rol) MATCH SIMPLE
+		on update cascade on delete no action
+);
+
+create table analisisFoliar(
+	muestra_tipoMuestra varchar(1),
+	muestra_numLaboratorio varchar(7),
+	muestra_predio_Rol varchar(10),
+	nitrogeno float,
+	fosforo float,
+	potasio float,
+	calcio float,
+	magnesio float,
+	hierro float,
+	manganeso float,
+	cobre float,
+	zinc float,
+	boro float,
+	azufre float,
+	carbono float,
+	ceniza float,
+	fps float,
+	aFrasco float,
+	frascoMuestraH float,
+	frascoMuestraS float,
+	crisol float,
+	crisolCeniza float,
+	observaciones text,
+	comentarios text,
+	primary key(muestra_tipoMuestra, muestra_numLaboratorio, muestra_predio_Rol),
+	constraint analisisFoliar_muestra_tipoMuestra_fkey FOREIGN KEY(muestra_tipoMuestra) references muestra(tipoMuestra) MATCH SIMPLE on update cascade on delete no action,
+	constraint analisisFoliar_muestra_numLaboratorio_fkey FOREIGN KEY(muestra_numLaboratorio) references muestra(numLaboratorio) MATCH SIMPLE on update cascade on delete no action,
+	constraint analisisFoliar_muestra_predioRol_fkey FOREIGN KEY(muestra_predioRol) references muestra(predio_Rol) MATCH SIMPLE on update cascade on delete no action
+);
+
+create table analisisSuelos(
+	muestra_tipoMuestra varchar(1),
+	muestra_numLaboratorio varchar(7),
+	muestra_predio_Rol varchar(10),
+	pH float,
+	p_Olsen float,
+	na float,
+	k float,
+	ca float,
+	mg float,
+	al float,
+	ct float,
+	s float,
+	ctLect float,
+	ctPeso float,
+	pH_kcl float,
+	al_ext float,
+	fe float,
+	mn float,
+	cu float,
+	zn float,
+	b float,
+	nt float,
+	nno3 float,
+	ctCalculado float,
+	mo float,
+	cN float,
+	sumaBases float,
+	cice float,
+	primary key(muestra_tipoMuestra, muestra_numLaboratorio, muestra_predio_Rol),
+	constraint analisisSuelos_muestra_tipoMuestra_fkey FOREIGN KEY(muestra_tipoMuestra) references muestra(tipoMuestra) MATCH SIMPLE on update cascade on delete no action,
+	constraint analisisSuelos_muestra_numLaboratorio_fkey FOREIGN KEY(muestra_numLaboratorio) references muestra(numLaboratorio) MATCH SIMPLE on update cascade on delete no action,
+	constraint analisisSuelos_muestra_predioRol_fkey FOREIGN KEY(muestra_predio_Rol) references muestra(predio_Rol) MATCH SIMPLE on update cascade on delete no action
+);
+
+
+
+
+INSERT INTO usuario(rut, nombre, apellido, pass) VALUES('17200367-2', 'Diego', 'Araneda', 'araneda');
+INSERT INTO usuario(rut, nombre, apellido, pass) VALUES('12629364-K', 'Gisela', 'Romeny', '12629364'),
+('13199114-2', 'Ilona', 'Slebe', '13199114'), ('7630196-4', 'Elizabeth', 'Labbe','7630196');
+
+
+
+ 	
