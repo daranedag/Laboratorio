@@ -1,0 +1,71 @@
+INSERT INTO usuario(rut, nombre, apellido, pass) VALUES('17200367-2', 'Diego', 'Araneda', 'araneda');
+INSERT INTO usuario(rut, nombre, apellido, pass) VALUES('12629364-K', 'Gisela', 'Romeny', '12629364'),
+('13199114-2', 'Ilona', 'Slebe', '13199114'), ('7630196-4', 'Elizabeth', 'Labbe','7630196');
+
+INSERT INTO operador(rut, nombre, apellido, direccion, fono, fax, comuna, region , mail) Values(
+	'70353700-6',
+	'Agrollanquihue A.G.',
+	' ',
+	'Quillota 122',
+	'65-253015',
+	'65-252192',
+	'Puerto Montt',
+	'X',
+	'agrollanquihue@gmail.com'		
+);
+
+INSERT INTO muestreador(rut, nombre) VALUES(
+	'15300146-4',
+	'Jorge Vera Balcazar'
+);
+
+INSERT INTO agricultor(rut, nombre, direccion, comuna, provincia, region, organizacion, areaindap) values(
+	'76259526-5',
+	'Agricola y Ganadera Porvenir Ltda.',
+	'Fundo Porvenir',
+	'Los Muermos',
+	'Llanquihue',
+	' ',
+	' ',
+	' '
+);
+
+INSERT INTO predio(rol, nombre, provincia, comuna, region) VALUES(
+	'251-003',
+	'Porvenir Lote A',
+	'Llanquihue',
+	'Los Muermos',
+	'X'	
+);
+
+INSERT INTO muestra VALUES(
+	'A',
+	'1234',
+	'251-003',  //cumple restriccion :)
+	'Huichaco',
+	'N°2',
+	20,
+	'Trumao'	
+);
+
+INSERT INTO analisisAguas VALUES(
+	'A',
+	'1234',
+	'251-003',
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	9,
+	10,
+	'Algún comentario al respecto',
+	'TECNICAS ANALITICAS UTILIZADAS:
+		pH y conductividad: determinación electrométrica.
+		Na y K: determinación por espectroscopía de emisión atómica.
+		Ca, Mg, Fe, Mn, Cu y Zn: determinación por espectroscopía de absorción atómica.'
+);
+	

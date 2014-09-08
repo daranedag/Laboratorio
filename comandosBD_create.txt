@@ -1,0 +1,178 @@
+CREATE TABLE usuario(
+	rut VARCHAR(10) PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	apellido VARCHAR(50) NOT NULL,
+	pass VARCHAR(25) NOT NULL
+);
+
+CREATE TABLE operador(
+	rut VARCHAR(10) PRIMARY KEY,
+	nombre VARCHAR(90) UNIQUE NOT NULL,
+	apellido VARCHAR(50) UNIQUE NOT NULL,
+	direccion varchar(90) NOT NULL,
+	fono VARCHAR(20),
+	fax VARCHAR(20),
+	comuna VARCHAR(30),
+	region VARCHAR(5),
+	mail VARCHAR(70)
+);
+
+
+Create table predio(
+	rol varchar(10) PRIMARY KEY,
+	nombre varchar(45),
+	provincia varchar(45),
+	comuna varchar(45),
+	region varchar(5)
+);
+
+Create table agricultor(
+	rut VARCHAR(10) PRIMARY KEY,
+	nombre VARCHAR(90) NOT NULL,
+	direccion varchar(90) NOT NULL,
+	comuna VARCHAR(30),
+	provincia varchar(45),
+	region VARCHAR(5),
+	organizacion varchar(45),
+	areaINDAP VARCHAR(45)
+);
+
+Create table muestreador(
+	rut varchar(10) primary key,
+	nombre varchar(90) not null
+);
+
+create table muestra(
+	tipoMuestra varchar(1) UNIQUE,
+	numLaboratorio varchar(7) UNIQUE,
+	predio_Rol varchar(10) UNIQUE,
+	comuna varchar(45),
+	potrero varchar(45),
+	profMuestreo float,
+	tipoSuelo varchar(45),
+	primary key(tipoMuestra, numLaboratorio, predio_Rol),
+	constraint muestra_predio_predioRol_fkey FOREIGN KEY(predio_Rol)
+		references predio(rol) MATCH SIMPLE
+		on update cascade on delete no action
+);
+
+create table analisisFoliar(
+	muestra_tipoMuestra varchar(1),
+	muestra_numLaboratorio varchar(7),
+	muestra_predio_Rol varchar(10),
+	N float,
+	P float,
+	K float,
+	Ca float,
+	Mg float,
+	Fe float,
+	Mn float,
+	Cu float,
+	Zn float,
+	B float,
+	S float,
+	C float,
+	ceniza float,
+	fps float,
+	aFrasco float,
+	frascoMuestraH float,
+	frascoMuestraS float,
+	crisol float,
+	crisolCeniza float,
+	observaciones text,
+	comentarios text,
+	primary key(muestra_tipoMuestra, muestra_numLaboratorio, muestra_predio_Rol),
+	constraint analisisFoliar_muestra_tipoMuestra_fkey FOREIGN KEY(muestra_tipoMuestra) references muestra(tipoMuestra) MATCH SIMPLE on update cascade on delete no action,
+	constraint analisisFoliar_muestra_numLaboratorio_fkey FOREIGN KEY(muestra_numLaboratorio) references muestra(numLaboratorio) MATCH SIMPLE on update cascade on delete no action,
+	constraint analisisFoliar_muestra_predioRol_fkey FOREIGN KEY(muestra_predioRol) references muestra(predio_Rol) MATCH SIMPLE on update cascade on delete no action
+);
+
+create table analisisSuelos(
+	muestra_tipoMuestra varchar(1),
+	muestra_numLaboratorio varchar(7),
+	muestra_predio_Rol varchar(10),
+	pH float,
+	p_Olsen float,
+	na float,
+	k float,
+	ca float,
+	mg float,
+	al float,
+	ct float,
+	s float,
+	ctLect float,
+	ctPeso float,
+	pH_kcl float,
+	al_ext float,
+	fe float,
+	mn float,
+	cu float,
+	zn float,
+	b float,
+	nt float,
+	nno3 float,
+	ctCalculado float,
+	mo float,
+	cN float,
+	sumaBases float,
+	cice float,
+	primary key(muestra_tipoMuestra, muestra_numLaboratorio, muestra_predio_Rol),
+	constraint analisisSuelos_muestra_tipoMuestra_fkey FOREIGN KEY(muestra_tipoMuestra) references muestra(tipoMuestra) MATCH SIMPLE on update cascade on delete no action,
+	constraint analisisSuelos_muestra_numLaboratorio_fkey FOREIGN KEY(muestra_numLaboratorio) references muestra(numLaboratorio) MATCH SIMPLE on update cascade on delete no action,
+	constraint analisisSuelos_muestra_predioRol_fkey FOREIGN KEY(muestra_predio_Rol) references muestra(predio_Rol) MATCH SIMPLE on update cascade on delete no action
+);
+
+create table informeAnalisisAguas(
+	muestra_tipoMuestra varchar(1),
+	muestra_numLaboratorio varchar(7),
+	muestra_predio_Rol varchar(10),
+	solicitante varchar(90),
+	fecha_rec varchar(15),  --se pregunta al usuario
+	fecha_ent varchar(15),  --se pregunta al usuario
+	identificacion text,  --se pregunta al usuario
+	pH float,  --se pregunta al usuario
+	conductividad float,  --se pregunta al usuario
+	Na float,
+	K float,
+	Ca float,
+	Mg float,
+	Fe float,
+	Mn float,
+	Cu float,
+	Zn float,
+	Comentarios text,  --se pregunta al usuario en caso de existir
+	Observaciones text default('TECNICAS ANALITICAS UTILIZADAS:
+		pH y conductividad: determinación electrométrica.
+		Na y K: determinación por espectroscopía de emisión atómica.
+		Ca, Mg, Fe, Mn, Cu y Zn: determinación por espectroscopía de absorción atómica.'),
+	primary key(muestra_tipoMuestra, muestra_numLaboratorio, muestra_predio_Rol),
+	constraint informeAnalisisAguas_muestra_tipoMuestra_fkey FOREIGN KEY(muestra_tipoMuestra) references muestra(tipoMuestra) MATCH SIMPLE on update cascade on delete no action,
+	constraint informeAnalisisAguas_muestra_numLaboratorio_fkey FOREIGN KEY(muestra_numLaboratorio) references muestra(numLaboratorio) MATCH SIMPLE on update cascade on delete no action,
+	constraint informeAnalisisAguas_muestra_predioRol_fkey FOREIGN KEY(muestra_predio_Rol) references muestra(predio_Rol) MATCH SIMPLE on update cascade on delete no action,
+	constraint informeAnalisisAguas_operador_nombre_fkey FOREIGN KEY(solicitante) references operador(nombre) MATCH SIMPLE on update cascade on delete no action
+);
+
+create table informe(
+	usuario_rut varchar(10),
+	muestreador_rut varchar(10),
+	muestra_tipoMuestra varchar(1),
+	muestra_numLaboratorio varchar(7),
+	agricultor_Rut varchar(10),
+	operador_Rut varchar(10),
+	observaciones text,
+	metodologia text,
+	razonSocial varchar(60) default('Universidad Austral de Chile'),
+	direccion varchar(45) default('Independencia 641'),
+	fonoFax varchar(45) default('(63)-221431, (63)-221234'),
+	rut varchar(11) default('81380500-6'),
+	comuna varchar(45) default('Valdivia'),
+	mail varchar(45) default('labnsf@uach.cl'),
+	web varchar(45) default('www.uach.cl/labsuelosforestales'),
+	primary key(usuario_rut, muestreador_rut, muestra_tipoMuestra, muestra_numLaboratorio, agricultor_Rut, operador_Rut),
+	constraint informe_usuario_rut_fkey FOREIGN KEY(usuario_rut) references usuario(rut) MATCH SIMPLE on update cascade on delete no action,
+	constraint informe_muestreador_rut_fkey FOREIGN KEY(muestreador_rut) references muestreador(rut) MATCH SIMPLE on update cascade on delete no action,
+	constraint informe_muestra_tipoMuestra_fkey FOREIGN KEY(muestra_tipoMuestra) references muestra(tipoMuestra) MATCH SIMPLE on update cascade on delete no action,
+	constraint informe_muestra_numLaboratorio_fkey FOREIGN KEY(muestra_numLaboratorio) references muestra(numLaboratorio) MATCH SIMPLE on update cascade on delete no action,
+	constraint informe_agricultor_rut_fkey FOREIGN KEY(agricultor_Rut) references agricultor(rut) MATCH SIMPLE on update cascade on delete no action,
+	constraint informe_operador_rut_fkey FOREIGN KEY(operador_Rut) references operador(rut) MATCH SIMPLE on update cascade on delete no action
+);
