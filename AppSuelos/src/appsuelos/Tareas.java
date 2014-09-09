@@ -51,7 +51,6 @@ public class Tareas extends javax.swing.JPanel {
         jButton1.setToolTipText("");
 
         jButton2.setText("Ingresar Nuevo Operador");
-        jButton2.setActionCommand("Ingresar Nuevo Operador");
 
         jButton12.setText("Ingresar Agricultor");
 
@@ -71,6 +70,11 @@ public class Tareas extends javax.swing.JPanel {
         jButton5.setToolTipText("");
 
         jButton7.setText("Informe de Aguas");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Informe Foliar");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +180,10 @@ public class Tareas extends javax.swing.JPanel {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
