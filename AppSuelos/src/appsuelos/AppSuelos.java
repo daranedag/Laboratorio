@@ -7,12 +7,14 @@
 package appsuelos;
 
 import java.io.*;
+import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 /**
  *
  * @author DieGui
@@ -23,11 +25,26 @@ public class AppSuelos {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
+    static final String url = "jdbc:postgresql://localhost:5432/labNSF";  //modificar datos de conexion
+    static Connection con; 
+    static String userDB = "javapgsql";
+    static String passDB = "javapgsql";
+    static String nombre;
+    static String apellido;
+    static Inicio v1;
+    static Tareas v2;
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        generarInformeSuelos();
-        leerArchivo("D:\\Dropbox\\readme.txt");
-        ConexionPostgres.consultar();
+        try{
+            Class.forName("org.postgresql.Driver");            
+            v1 = new Inicio();
+            v1.setVisible(true);
+            //generarInformeSuelos();
+            //leerArchivo("D:\\Dropbox\\readme.txt");            
+        }      
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     public static void leerArchivo(String ruta) throws IOException{
@@ -62,8 +79,31 @@ public class AppSuelos {
         
     }
     
-    public static boolean validarUsuario(String rut, String password){
-        return true;
+    public static void validarUsuario(String rut, String password){
+        try{
+            con  = DriverManager.getConnection(url, userDB, passDB);
+            String query = "SELECT nombre, apellido FROM usuario where rut=\'"+rut+"\' AND pass=\'"+password+"\'";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                System.out.print("Correcto");                
+                nombre = rs.getString("nombre");
+                apellido = rs.getString("apellido");
+                stmt.execute("END");
+                v1.setVisible(false);
+                v2 = new Tareas();
+                v2.setVisible(true);
+                v2.jLabel1.setText(nombre + " " +apellido);                
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Rut o Contraseña Incorrecta");
+            }            
+            stmt.close();
+            con.close();
+        }
+        catch(Exception e){
+            System.out.print(e.getMessage());
+        }
     }
     
     public static void escribirEncabezadoInforme(Sheet h){
