@@ -6,6 +6,7 @@
 
 package appsuelos;
 
+import java.awt.HeadlessException;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
@@ -75,6 +76,7 @@ public class AppSuelos {
         try{
             FileOutputStream out = new FileOutputStream(file);
             escribirEncabezadoInforme(libro, hoja);
+            //agregarImagenInforme(libro, hoja);
             libro.write(out);
             out.close();
         }
@@ -109,22 +111,43 @@ public class AppSuelos {
             stmt.close();
             con.close();
         }
-        catch(Exception e){
+        catch(HeadlessException e){
+            System.out.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error con la Base de Datos");
+        } catch (SQLException e) {
             System.out.print(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error con la Base de Datos");
         }
     }
     
-    public static void escribirEncabezadoInforme(Workbook wb, Sheet h) throws FileNotFoundException, IOException{
-        //Titulos con estilos e imagenes
-        /* 
-                                    UNIVERSIDAD AUSTRAL DE CHILE                            Garamond LightCondensed 22
-            LABORATORIO DE NUTRICIÓN Y SUELOS FORESTALES - FACULTAD DE CIENCIAS FORESTALES  Garamond LightCondensed 14
-                    CASILLA 567 - VALDIVIA FONOFAX (63) 221431  E-mail  labnsf@uach.cl      Garamond LightCondensed 14
-                            http://www.uach.cl/labsuelosforestales                          Arial 12 (Link)
-         */
-        CreationHelper helper = wb.getCreationHelper();
-        
+    /*
+    public static void agregarImagenInforme(Workbook wb, Sheet h) throws FileNotFoundException, IOException{
+        try{
+            //add picture data to this workbook.
+            InputStream is = new FileInputStream("C:\\Users\\DieGui\\Documents\\GitHub\\Laboratorio\\AppSuelos\\src\\appsuelos\\logo.png");
+            byte[] bytes = IOUtils.toByteArray(is);
+            int pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+            is.close();
+            CreationHelper helper = wb.getCreationHelper();
+            // Create the drawing patriarch.  This is the top level container for all shapes. 
+            Drawing drawing = h.createDrawingPatriarch();
+            //add a picture shape
+            ClientAnchor anchor = helper.createClientAnchor();
+            //set top-left corner of the picture,
+            //subsequent call of Picture#resize() will operate relative to it
+            anchor.setCol1(3);
+            anchor.setRow1(2);
+            Picture pict = drawing.createPicture(anchor, pictureIdx);
+            //auto-size picture relative to its top-left corner
+            pict.resize();            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }        
+    }
+    */
+    
+    public static void escribirEncabezadoInforme(Workbook wb, Sheet h) throws FileNotFoundException, IOException{            
         //Estilo Celda del titulo  UNIVERSIDAD AUSTRAL DE CHILE
         CellStyle cs1 = wb.createCellStyle();
         cs1.setAlignment(CellStyle.ALIGN_CENTER);        
@@ -137,8 +160,8 @@ public class AppSuelos {
         Row fila = h.createRow(1);
         Cell celda = fila.createCell(7);
         celda.setCellStyle(cs1);
-        celda.setCellValue("U   N  I  V  E  R  S  I  D  A  D         A  U  S  T  R  A  L        D  E            C  H  I  L  E");
-        
+        celda.setCellValue("U   N  I  V  E  R  S  I  D  A  D       A  U  S  T  R  A  L      D  E         C  H  I  L  E");
+
         //Estilo Celda del titulo  LABORATORIO DE NUTRICIÓN Y SUELOS FORESTALES - FACULTAD DE CIENCIAS FORESTALES
         CellStyle cs2 = wb.createCellStyle();
         cs2.setAlignment(CellStyle.ALIGN_CENTER);        
@@ -152,13 +175,13 @@ public class AppSuelos {
         celda = fila.createCell(7);
         celda.setCellStyle(cs2);
         celda.setCellValue("LABORATORIO DE NUTRICIÓN Y SUELOS FORESTALES - FACULTAD DE CIENCIAS FORESTALES");
-        
+
         //Estilo Celda del titulo   CASILLA 567 - VALDIVIA FONOFAX (63) 221431  E-mail  labnsf@uach.cl
         fila = h.createRow(3);
         celda = fila.createCell(7);
         celda.setCellStyle(cs2);
         celda.setCellValue("CASILLA 567 - VALDIVIA FONOFAX (63) 221431  E-mail  labnsf@uach.cl");
-                
+
         //Estilo Celda del titulo  http://www.uach.cl/labsuelosforestales LINK
         CellStyle hlink_style = wb.createCellStyle();
         hlink_style.setAlignment(CellStyle.ALIGN_CENTER); 
@@ -170,37 +193,31 @@ public class AppSuelos {
         fila = h.createRow(4);
         celda = fila.createCell(7);
         celda.setCellStyle(hlink_style);
-        celda.setCellValue("http://www.uach.cl/labsuelosforestales");
-        
-        int pictureIdx;
-        try{ //agregar imagen del logo del laboratorio   Fila 10 Columna 13
-            InputStream is = new FileInputStream("logoLab.png");
-            byte[] bytes = IOUtils.toByteArray(is);
-            pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
-            Drawing drawing = h.createDrawingPatriarch();
-            ClientAnchor anchor = helper.createClientAnchor();
-            anchor.setCol1(13);
-            anchor.setRow1(10);
-            Picture pict = drawing.createPicture(anchor, pictureIdx);
-            pict.resize();
-        }
-        catch(FileNotFoundException e){
-            System.out.println(e.getMessage());
-        }
-        
-    }
-                
-        
-        
-        
-    
-        
+        celda.setCellValue("http://www.uach.cl/labsuelosforestales");            
         //agregar jefe y analistas del laboratorio
+        
+        CellStyle cs3 = wb.createCellStyle();
+        cs3.setAlignment(CellStyle.ALIGN_LEFT);        
+        Font f3 = wb.createFont();
+        f3.setFontName("Arial");
+        f3.setFontHeightInPoints((short) 11);
+        f3.setColor((short)0x7fff);
+        f3.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        cs3.setFont(f3);                
+        fila = h.createRow(14);
+        celda = fila.createCell(1);
+        celda.setCellStyle(cs3);
+        h.setColumnWidth(1, 22*256);
+        celda.setCellValue("JEFE LABORATORIO:   ");
+        celda = fila.createCell(3);
+        celda.setCellStyle(cs3);
+        celda.setCellValue("GISELA ROMENY, Bioquímico");
         /*
         JEFE LABORATORIO:  GISELA ROMENY, Bioquímico
         ANALISTAS:  ILONA SLEBE, Agrónomo
-                    GISELA ROMENY, Bioquímico
-        
+                    GISELA ROMENY, Bioquímico        
         */
+        
     }
+}
 
