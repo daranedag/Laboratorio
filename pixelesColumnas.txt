@@ -1,0 +1,18 @@
+A: 56px
+B: 156px
+C: 96px
+D: 100px
+E: 68px
+F: 126 px
+G: 98 px
+H 92 px
+I: 69px
+J: 66 px
+K: 80 px
+L: 66 px
+M: 76 px
+N: 66 px
+O: 66 px
+P: 80 px
+Q: 19 px
+ 
