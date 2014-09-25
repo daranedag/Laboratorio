@@ -48,9 +48,8 @@ public class AppSuelos {
             Class.forName("org.postgresql.Driver");            
             v1 = new Inicio();
             v1.setVisible(true);
-            generarInformeSuelos();
-            
-            //leerArchivo("D:\\Dropbox\\readme.txt");            
+            //generarInformeSuelos();            
+            leerArchivo("D:\\Dropbox\\Public\\Analisis_Calcio.txt");            
         }      
         catch(Exception e) {
             System.out.println(e.getMessage());
@@ -61,9 +60,17 @@ public class AppSuelos {
         try{
             File archivo = new File(ruta);
             Scanner entrada = new Scanner(archivo);
+            String linea;
+            int i = 0;
             while(entrada.hasNextLine()){
-                String linea = entrada.nextLine();
-                System.out.println(linea);
+                if(i<16){
+                    entrada.nextLine();
+                    i++;
+                }
+                else{
+                    linea = entrada.nextLine();
+                    ingresarMuestra(linea);
+                }
             }
         }
         catch(IOException e){
@@ -94,6 +101,20 @@ public class AppSuelos {
     
     public static void consultar(String query){
         
+    }
+    
+    public static void ingresarMuestra(String line){
+        String[] sep = line.split("\t");
+        System.out.print(sep[1]);
+        System.out.print("\t");
+        System.out.println(sep[6]);
+        /*
+        for(int i=0; i<sep.length; i++){
+            if(i==0 || i==6){
+                System.out.print(sep[0]);
+            }
+            System.out.println();
+        }*/
     }
     
     public static void validarUsuario(String rut, String password){
@@ -134,12 +155,9 @@ public class AppSuelos {
             byte[] bytes = IOUtils.toByteArray(is);
             int pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_JPEG);
             is.close();
-
             CreationHelper helper = wb.getCreationHelper();
-
             // Create the drawing patriarch.  This is the top level container for all shapes. 
             Drawing drawing = h.createDrawingPatriarch();
-
             //add a picture shape
             ClientAnchor anchor = helper.createClientAnchor();
             //set top-left corner of the picture,
@@ -147,7 +165,6 @@ public class AppSuelos {
             anchor.setCol1(13);
             anchor.setRow1(9);
             Picture pict = drawing.createPicture(anchor, pictureIdx);
-
             //auto-size picture relative to its top-left corner
             pict.resize();            
         }
@@ -225,7 +242,6 @@ public class AppSuelos {
         fila = h.createRow(13);
         celda = fila.createCell(1);
         celda.setCellStyle(cs3);
-        //h.setColumnWidth(1, 22*256);
         celda.setCellValue("JEFE LABORATORIO:   ");
         celda = fila.createCell(3);
         celda.setCellStyle(cs3);
@@ -321,9 +337,7 @@ public class AppSuelos {
         celda = fila.createCell(1);
         celda.setCellStyle(cs4);
         celda.setCellValue("ARCHIVO");
-        
-        //Agregar bordes a celdas 
-        
+                
         //Agregar titulo del informe
         CellStyle cs5 = wb.createCellStyle();
         cs5.setAlignment(CellStyle.ALIGN_LEFT);
@@ -365,16 +379,84 @@ public class AppSuelos {
         cs7.setBorderTop(CellStyle.BORDER_THIN);
         cs7.setTopBorderColor(IndexedColors.BLACK.getIndex());
         
+        CellStyle cs8 = wb.createCellStyle();
+        cs8.setAlignment(CellStyle.ALIGN_CENTER);
+        cs8.setFont(f6);
+        cs8.setBorderLeft(CellStyle.BORDER_MEDIUM);
+        cs8.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        cs8.setBorderBottom(CellStyle.BORDER_MEDIUM);
+        cs8.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+                
+        CellStyle cs9 = wb.createCellStyle();
+        cs9.setAlignment(CellStyle.ALIGN_CENTER);
+        cs9.setFont(f6);
+        cs9.setBorderTop(CellStyle.BORDER_MEDIUM);
+        cs9.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        
+        CellStyle cs10 = wb.createCellStyle();
+        cs10.setAlignment(CellStyle.ALIGN_CENTER);
+        cs10.setFont(f6);
+        cs10.setBorderLeft(CellStyle.BORDER_MEDIUM);
+        cs10.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        cs10.setBorderBottom(CellStyle.BORDER_MEDIUM);
+        cs10.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        
+        CellStyle cs11 = wb.createCellStyle();
+        cs11.setBorderLeft(CellStyle.BORDER_MEDIUM);
+        cs11.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        
+        CellStyle cs12 = wb.createCellStyle();
+        cs12.setBorderRight(CellStyle.BORDER_MEDIUM);
+        cs12.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        
+        CellStyle cs13 = wb.createCellStyle();
+        cs13.setAlignment(CellStyle.ALIGN_CENTER);
+        cs13.setFont(f6);
+        
+        CellStyle cs14 = wb.createCellStyle();
+        cs14.setAlignment(CellStyle.ALIGN_CENTER);
+        cs14.setFont(f6);
+        cs14.setBorderLeft(CellStyle.BORDER_MEDIUM);
+        cs14.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        cs14.setBorderBottom(CellStyle.BORDER_MEDIUM);
+        cs14.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        
+        CellStyle cs15 = wb.createCellStyle();
+        cs15.setBorderBottom(CellStyle.BORDER_MEDIUM);
+        cs15.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        
+        CellStyle cs16 = wb.createCellStyle();
+        cs16.setBorderBottom(CellStyle.BORDER_MEDIUM);
+        cs16.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        cs16.setBorderRight(CellStyle.BORDER_MEDIUM);
+        cs16.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        
+        CellStyle cs17 = wb.createCellStyle();
+        cs17.setBorderBottom(CellStyle.BORDER_MEDIUM);
+        cs17.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        cs17.setBorderRight(CellStyle.BORDER_MEDIUM);
+        cs17.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        cs17.setBorderTop(CellStyle.BORDER_THIN);
+        cs17.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        cs17.setAlignment(CellStyle.ALIGN_CENTER);
+        cs17.setFont(f6);
+        
         fila = h.createRow(33);
-        for(int i=0; i<13; i++){
+        for(int i=0; i<14; i++){
             celda = fila.createCell(i);
             celda.setCellStyle(cs6);
             if(i==0){
                 celda.setCellValue("Nº");
             }
+            if(i==2){
+                celda.setCellStyle(cs9);
+            }
+            if(i==1 || i==3){
+                celda.setCellStyle(cs9);
+            }
         }
         fila = h.createRow(34);
-        for(int i=0; i<13; i++){
+        for(int i=0; i<14; i++){
             celda = fila.createCell(i);
             celda.setCellStyle(cs7);
             switch(i){
@@ -382,15 +464,76 @@ public class AppSuelos {
                     celda.setCellValue("LAB.");
                     break;
                 case 1:
+                    celda.setCellStyle(cs11);
                     break;
                 case 2:
+                    celda.setCellStyle(cs13);
                     celda.setCellValue("IDENTIFICACION");
                     break;
+                case 3:
+                    celda.setCellStyle(cs12);
+                    break;
+                case 4:
+                    celda.setCellValue("pH");
+                    break;
+                case 5:
+                    celda.setCellValue("Condctividad");
+                    break;                    
+                case 6:
+                    celda.setCellValue("Na");
+                    break;
+                case 7:
+                    celda.setCellValue("K");
+                    break;
+                case 8:
+                    celda.setCellValue("Ca");
+                    break;
+                case 9:
+                    celda.setCellValue("Mg");
+                    break;
+                case 10:
+                    celda.setCellValue("Fe");
+                    break;
+                case 11:
+                    celda.setCellValue("Mn");
+                    break;
+                case 12:
+                    celda.setCellValue("Cu");
+                    break;
+                case 13:
+                    celda.setCellValue("Zn");
+                    break;                    
             }
         }
-      
-
-        
+                
+        fila = h.createRow(35);
+        for(int i=0; i<14; i++){
+            celda = fila.createCell(i);
+            if(i==0 || i==1){
+                celda.setCellStyle(cs14);
+            }
+            else if(i==2){
+                celda.setCellStyle(cs15);
+            }
+            else if(i==3){
+                celda.setCellStyle(cs16);
+            }
+            else if(i==5){
+                celda.setCellStyle(cs17);
+                celda.setCellValue("(µS/cm)");
+                // (µS/cm)
+            }
+            else if(i==6){
+                celda.setCellStyle(cs17);
+                celda.setCellValue("----------------------------------------- (mg/L) ----------------------------------------");
+                h.addMergedRegion(new CellRangeAddress(35, 35, 6, 13));
+                //----------------------------------------- (mg/L) ----------------------------------------
+                //Combinar y centrar celdas hasta la 13
+            }
+            else{
+                celda.setCellStyle(cs17);
+            }           
+        }
     }
 }
 
