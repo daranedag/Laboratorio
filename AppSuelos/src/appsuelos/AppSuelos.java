@@ -48,8 +48,6 @@ public class AppSuelos {
             Class.forName("org.postgresql.Driver");            
             v1 = new Inicio();
             v1.setVisible(true);
-            //generarInformeSuelos();            
-            leerArchivo("D:\\Dropbox\\Public\\Analisis_Calcio.txt");            
         }      
         catch(Exception e) {
             System.out.println(e.getMessage());
@@ -86,7 +84,7 @@ public class AppSuelos {
         ps.setFitHeight((short) 1);
         ps.setFitWidth((short) 1);
         agregarImagenInforme(libro, hoja);
-        String file = "pruba.xls";
+        String file = "InformeSuelos.xls";
         try{
             FileOutputStream out = new FileOutputStream(file);
             escribirEncabezadoInforme(libro, hoja);
@@ -123,8 +121,7 @@ public class AppSuelos {
             String query = "SELECT nombre, apellido FROM usuario where rut=\'"+rut+"\' AND pass=\'"+password+"\'";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            if(rs.next()){
-                System.out.print("Correcto");                
+            if(rs.next()){              
                 nombre = rs.getString("nombre");
                 apellido = rs.getString("apellido");
                 stmt.execute("END");
