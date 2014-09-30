@@ -180,12 +180,25 @@ public class Muestra extends javax.swing.JFrame {
         String userDB = "javapgsql";
         String passDB = "javapgsql";
         try{
+            String tipoMuestra = jComboBox1.getSelectedItem().toString();
+            String numLab = jTextField2.getText();
+            String predio = jComboBox2.getSelectedItem().toString();
+            String comuna = jTextField4.getText();
+            String potrero = jTextField5.getText();
+            String profundidad = jTextField6.getText();
+            String tipoSuelo = jTextField7.getText();
+            
             Class.forName("org.postgresql.Driver");
             con  = DriverManager.getConnection(url, userDB, passDB);
             Statement stmt = con.createStatement();
+            String query = "INSERT INTO muestra VALUES(\'"+tipoMuestra+"\',\'"+numLab+"\',\'"+predio+"\',\'"+comuna+"\',\'"+potrero+"\',\'"+profundidad+"\',\'"+tipoSuelo+"\')";
+            stmt.executeQuery(query);
+            stmt.execute("END");
+            stmt.close();
+            con.close();
         }
         catch(Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

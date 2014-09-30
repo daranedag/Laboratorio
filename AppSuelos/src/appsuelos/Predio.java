@@ -148,8 +148,7 @@ public class Predio extends javax.swing.JFrame {
             stmt.executeQuery(query);
             stmt.execute("END");
             stmt.close();
-            con.close();       
-            
+            con.close();
         }      
         catch(Exception e) {
             e.getMessage();
